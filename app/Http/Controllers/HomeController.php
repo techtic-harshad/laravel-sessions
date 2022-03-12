@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['imageUpload']);
     }
 
     /**
@@ -23,6 +23,28 @@ class HomeController extends Controller
      */
     public function index()
     {
+        return view('home');
+    }
+
+    public function imageUpload(Request $request)
+    {
+        // print_r($request->all());die;
+
+        $file = $request->avtar;
+
+
+        $fileName   = time() . '_' . $file->getClientOriginalName();
+        $distType = env('STORAGE_DISK_TYPE', 'public');
+
+
+        \Storage::disk($distType)->put('avatar/' . $fileName, \File::get($file));
+
+
+        print_r('avatar/' . $fileName);die;
+        $filePath   = 'storage/'.$path . $fileName;
+
+
+
         return view('home');
     }
 }
