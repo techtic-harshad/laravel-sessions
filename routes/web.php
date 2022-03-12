@@ -14,7 +14,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+     
+    $collection = collect([1, 2, 3, 4, 5, 6, 7]);
+
+
+    $collection1 = $collection->collect();
+
+
+    
+ 
+$chunks = $collection->chunk(3);
+ 
+$chunks->all();
+
+
+     dd($chunks);
+    foreach ($users as $user) {
+        echo $user->name;
+    }
 });
 
 Route::post('image', [App\Http\Controllers\HomeController::class, 'imageUpload']);
